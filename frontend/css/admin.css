@@ -1,0 +1,576 @@
+/* --- Admin Global Layout --- */
+body {
+    background-color: #f4f6f8;
+    min-height: 100vh;
+    /* স্ক্রিন হাইট নিশ্চিত করার জন্য */
+    margin: 0;
+}
+
+.admin-container {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 20px;
+    display: block;
+    /* কন্টেইনার যেন ফ্লেক্সের কারণে আইটেম ছোট না করে */
+}
+
+/* --- Tabs --- */
+.admin-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    border: none;
+    background: #e0e0e0;
+    color: #555;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.tab-btn:hover {
+    background: #d5d5d5;
+}
+
+.tab-btn.active {
+    background: #ff9800;
+    color: white;
+    box-shadow: 0 2px 5px rgba(255, 152, 0, 0.3);
+}
+
+/* --- Section Visibility --- */
+.admin-section {
+    display: none;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    animation: fadeIn 0.3s ease-in-out;
+    height: auto;
+    /* কন্টেন্ট অনুযায়ী হাইট বাড়বে */
+}
+
+.admin-section.active-section {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Buttons (Home & Logout) --- */
+.home-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 1.5rem;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.home-btn:hover {
+    color: #ff9800;
+}
+
+/* New Flex Container for Right Header */
+.header-right {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* Spacing between Toggle and Logout */
+}
+
+.logout-btn {
+    /* Removed absolute positioning */
+    padding: 8px 16px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logout-btn:hover {
+    background-color: #b71c1c;
+}
+
+.section-title {
+    font-size: 1.4rem;
+    color: #444;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+/* --- Forms --- */
+.admin-form .form-group {
+    margin-bottom: 15px;
+}
+
+.admin-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    /* ইনপুট যেন কন্টেইনারের বাইরে না যায় */
+}
+
+input[type="file"] {
+    padding-left: 10px;
+    /* Fix: Add space for Choose File button */
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.submit-btn:hover {
+    background-color: #f57c00;
+}
+
+/* --- Order Management Styles --- */
+.orders-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* প্রতিটি অর্ডারের মাঝে গ্যাপ */
+}
+
+.order-card {
+    border: 1px solid #eee;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+    flex-shrink: 0;
+    /* সংকুচিত হওয়া বন্ধ করার প্রধান কোড */
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.order-info h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.order-info p {
+    margin: 5px 0 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Payment Badges */
+.badge {
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.badge-cod {
+    background: #fff3e0;
+    color: #ef6c00;
+    border: 1px solid #ffe0b2;
+}
+
+.badge-online {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+/* Order Items */
+.order-items {
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+.item-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+/* Timeline Styles */
+.timeline-container {
+    margin-top: 15px;
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #eee;
+}
+
+.timeline-title {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.timeline-entry {
+    font-size: 0.9rem;
+    padding-left: 10px;
+    border-left: 3px solid #ddd;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.timeline-entry strong {
+    color: #333;
+}
+
+/* Status Control */
+.status-control {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #ddd;
+}
+
+.update-btn {
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    padding: 0 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* --- Product List --- */
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+    /* লিস্ট আইটেম সংকুচিত হওয়া রোধ করবে */
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.product-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.delete-btn {
+    background-color: #ffebee;
+    color: #d32f2f;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #ffcdd2;
+}
+
+/* --- Dark Mode Overrides --- */
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+}
+
+body.dark-mode .admin-container {
+    background-color: transparent;
+}
+
+body.dark-mode .dashboard-title {
+    color: #f0f0f0;
+}
+
+body.dark-mode .home-btn {
+    color: #f0f0f0;
+}
+
+body.dark-mode .home-btn:hover {
+    color: #ff9800;
+}
+
+body.dark-mode .admin-section {
+    background: #2c2c2c;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .section-title {
+    color: #ddd;
+    border-bottom-color: #444;
+}
+
+body.dark-mode .admin-form label {
+    color: #ccc;
+}
+
+body.dark-mode .admin-form input,
+body.dark-mode .admin-form select,
+body.dark-mode .admin-form textarea {
+    background-color: #333;
+    border-color: #555;
+    color: #fff;
+}
+
+body.dark-mode .admin-form input:focus,
+body.dark-mode .admin-form select:focus,
+body.dark-mode .admin-form textarea:focus {
+    border-color: #ff9800;
+}
+
+/* Orders List Dark Mode */
+body.dark-mode .order-card {
+    background-color: #333;
+    border-color: #444;
+}
+
+body.dark-mode .order-header {
+    border-bottom-color: #444;
+}
+
+body.dark-mode .order-header h3 {
+    color: #fff;
+}
+
+body.dark-mode .order-info p {
+    color: #ccc;
+}
+
+body.dark-mode .timeline-container {
+    background: #252525;
+    border-color: #444;
+}
+
+body.dark-mode .timeline-entry {
+    color: #bbb;
+    border-left-color: #555;
+}
+
+/* Product List Dark Mode */
+body.dark-mode .product-item {
+    background-color: #333;
+    border-color: #444;
+}
+
+/* Theme Toggle Button Position */
+.theme-toggle-btn {
+    /* Removed absolute positioning */
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s;
+    /* No z-index needed inside flex */
+}
+
+body.dark-mode .theme-toggle-btn {
+    color: #f0f0f0;
+}
+
+.theme-toggle-btn:hover {
+    color: #ff9800;
+}
+
+.theme-toggle-btn .fa-sun {
+    display: none;
+}
+
+body.dark-mode .theme-toggle-btn .fa-moon {
+    display: none;
+}
+
+body.dark-mode .theme-toggle-btn .fa-sun {
+    display: block;
+    color: #FFD700;
+}
+
+body.dark-mode .status-control select {
+    background-color: #333;
+    color: #fff;
+    border-color: #555;
+}
+
+/* --- Status Colors (Explicit for Admin) --- */
+.status-delivered {
+    color: #007BFF !important;
+    font-weight: bold;
+}
+
+.status-cancelled {
+    color: #DC3545 !important;
+    font-weight: bold;
+}
+
+/* --- Mobile Layout Fixes (Max Width 768px) --- */
+
+/* --- Mobile Layout Fixes (Max Width 768px) --- */
+@media (max-width: 768px) {
+
+    /* 1. Fix Vertical Spacing */
+    /* 1. Fix Vertical Spacing & Expand Width */
+    .admin-container {
+        margin-top: 5px;
+        /* Minimal top space */
+        padding: 10px 5px;
+        /* Minimal side padding */
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .admin-section {
+        padding: 15px 10px;
+        /* Reduced internal padding for wider form */
+    }
+
+    /* 2. Vertical Stacked Buttons (Full Width) */
+    .admin-tabs {
+        display: flex;
+        flex-direction: column;
+        /* Vertical Stack */
+        gap: 10px;
+        /* Space between buttons */
+        width: 100%;
+    }
+
+    .tab-btn {
+        width: 100%;
+        /* Full Width */
+        text-align: center;
+        border-radius: 8px;
+        /* Slightly less rounded for bar look */
+        padding: 12px;
+        margin: 0;
+    }
+
+    /* 3. Form Field Enhancements */
+    .admin-form input,
+    .admin-form select,
+    .admin-form textarea {
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .admin-form input:focus,
+    .admin-form select:focus,
+    .admin-form textarea:focus {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        /* Floating effect */
+        border-color: #ff9800;
+        outline: none;
+    }
+
+    .admin-form textarea {
+        min-height: 120px;
+        /* Good height for mobile */
+    }
+
+    ::placeholder {
+        color: #aaa;
+        font-weight: 300;
+    }
+
+    /* 4. File Upload Area Styling */
+    input[type="file"] {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 2px dashed #ddd;
+        text-align: center;
+        width: 100%;
+        cursor: pointer;
+        position: relative;
+    }
+
+    /* 5. Price & Stock Alignment (Mobile Grid) */
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        /* 2 Columns for Price */
+        gap: 10px;
+    }
+
+    .form-grid .form-group:last-child {
+        grid-column: 1 / -1;
+        /* Stock takes full width below */
+    }
+
+    /* 6. Dynamic Submit Button */
+    .submit-btn {
+        width: 100%;
+        font-weight: bold;
+        font-size: 1.1rem;
+        padding: 14px;
+        transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    .submit-btn:active {
+        transform: scale(0.98);
+        /* Click effect */
+    }
+}

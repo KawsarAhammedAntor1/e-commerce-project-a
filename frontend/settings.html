@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="js/config.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Settings - Admin</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Reuse Admin layout structure -->
+    <a href="index.html" class="home-btn" title="Back to Home">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+
+
+    <main class="admin-container" style="margin-top: 20px;">
+
+        <section class="admin-section active-section" style="max-width: 600px; margin: 0 auto;">
+            <h2 class="section-title"><i class="fas fa-cogs"></i> Website Settings</h2>
+
+            <form id="settings-form" class="admin-form">
+                <div class="form-group">
+                    <label>Website Name</label>
+                    <input type="text" id="siteName" name="siteName" placeholder="e.g. My Awesome Shop" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Logo Image</label>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <input type="file" id="logoFile" name="logo" accept="image/*" style="flex: 1;">
+                        <button type="button" id="delete-logo-btn" title="Delete Logo"
+                            style="display: none; background: none; border: none; font-size: 1.2rem; color: #dc3545; cursor: pointer;">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                    <small>Upload a new logo to replace the current one.</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Main Banner Image</label>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <input type="file" id="bannerFile" name="banner" accept="image/*" style="flex: 1;">
+                        <button type="button" id="delete-banner-btn" title="Delete Banner"
+                            style="display: none; background: none; border: none; font-size: 1.2rem; color: #dc3545; cursor: pointer;">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                    <small>Upload a new banner for the homepage.</small>
+                </div>
+
+                <div class="form-group" style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
+                    <h3 class="section-title" style="font-size: 1.2rem; margin-bottom: 15px;">Add Contact Information
+                    </h3>
+
+                    <label>Facebook URL</label>
+                    <input type="text" id="facebookUrl" name="facebookUrl"
+                        placeholder="https://facebook.com/yourprofile">
+
+                    <label style="margin-top: 10px; display: block;">Support Email</label>
+                    <input type="email" id="supportEmail" name="supportEmail" placeholder="support@gmail.com">
+                </div>
+
+                <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Save Settings</button>
+            </form>
+
+
+        </section>
+    </main>
+
+    <script src="js/global.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+
+</html>
