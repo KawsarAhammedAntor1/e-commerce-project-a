@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="js/config.js"></script>
+    <script src="js/site-loader.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details - Admin Dashboard</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <!-- Using profile CSS for order cards/tables style reuse if needed, or just admin.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .details-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            background-color: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #5a6268;
+        }
+
+        .section-box {
+            margin-bottom: 30px;
+        }
+
+        .section-box h3 {
+            font-size: 1.2rem;
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item label {
+            font-weight: bold;
+            display: block;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .info-item p {
+            margin: 0;
+            color: #333;
+        }
+
+        /* Product Table */
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .product-table th,
+        .product-table td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product-table th {
+            background-color: #f8f9fa;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .product-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .summary-box {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: right;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .summary-row span:first-child {
+            margin-right: 20px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .total-row {
+            font-size: 1.3rem;
+            color: var(--primary-orange);
+            font-weight: bold;
+            border-top: 2px solid #ddd;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        /* Dark Mode Support */
+        body.dark-mode .details-container {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .section-box h3 {
+            color: #ff9800;
+            border-bottom-color: #333;
+        }
+
+        body.dark-mode .info-item label {
+            color: #aaa;
+        }
+
+        body.dark-mode .info-item p {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .product-table th {
+            background-color: #2c2c2c;
+            color: #e0e0e0;
+            border-bottom-color: #444;
+        }
+
+        body.dark-mode .product-table td {
+            border-bottom-color: #333;
+            color: #ccc;
+        }
+
+        body.dark-mode .summary-box {
+            background-color: #252525;
+        }
+
+        body.dark-mode .summary-row span:first-child {
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="details-container">
+        <div class="details-header">
+            <h1 style="margin: 0; font-size: 1.8rem;">Order Details</h1>
+            <a href="admin.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+
+        <div id="loading-message" style="text-align: center; padding: 40px;">
+            <i class="fas fa-spinner fa-spin fa-2x"></i>
+            <p style="margin-top: 10px;">Loading order details...</p>
+        </div>
+
+        <div id="order-content" style="display: none;">
+            <!-- Order Meta -->
+            <div style="margin-bottom: 20px; font-size: 0.9rem; color: #777;">
+                <span id="order-id">ID: #Loading...</span> |
+                <span id="order-date">Date: Loading...</span> |
+                <span id="order-status" style="font-weight: bold; color: var(--primary-orange);">Status:
+                    Loading...</span>
+            </div>
+
+            <!-- Customer Info -->
+            <div class="section-box">
+                <h3>Customer Information</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Customer Name</label>
+                        <p id="customer-name">Loading...</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Phone Number</label>
+                        <p id="customer-phone">Loading...</p>
+                    </div>
+                    <div class="info-item">
+                        <label>District (Zilla)</label>
+                        <p id="shipping-district">Loading...</p>
+                    </div>
+                    <div class="info-item">
+                        <label>City / Area</label>
+                        <p id="shipping-area">Loading...</p>
+                    </div>
+                </div>
+                <div class="info-item" style="margin-top: 15px;">
+                    <label>Full Shipping Address</label>
+                    <p id="shipping-address">Loading...</p>
+                </div>
+            </div>
+
+            <!-- Product Details -->
+            <div class="section-box">
+                <h3>Ordered Products</h3>
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-list-body">
+                        <!-- Rows rendered by JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="section-box">
+                <h3>Payment Summary</h3>
+                <div class="summary-box">
+                    <div class="summary-row">
+                        <span>Product Price:</span>
+                        <span id="product-price">0.00 BDT</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery Charge:</span>
+                        <span id="delivery-charge">0.00 BDT</span>
+                    </div>
+                    <!-- Could add Tax/Shipping fields here if they exist in backend logic -->
+                    <div class="summary-row total-row">
+                        <span>Total Amount:</span>
+                        <span id="total-amount">0.00 BDT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/global.js"></script>
+    <script src="js/order.js"></script>
+</body>
+
+</html>
